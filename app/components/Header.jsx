@@ -11,9 +11,9 @@ function Header() {
 
   const db = getFirestore(app);
 
-  useEffect(()=>{
+  useEffect(() =>{
     saveUserInfo();
-  },[session])
+  }, [session]);
 
   const saveUserInfo=async()=>{
     if(session?.user)
