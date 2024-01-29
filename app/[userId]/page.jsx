@@ -2,6 +2,8 @@
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import app from '../Shared/firebaseConfig';
+import UserInfo from './../components/UserInfo'
+
 
 const Profile = ({params}) => {
     const db = getFirestore(app);
@@ -27,7 +29,9 @@ const Profile = ({params}) => {
         }
     }
   return (
-    <div>Profile</div>
+    <div>
+        <UserInfo/>
+    </div>
   )
 }
 
