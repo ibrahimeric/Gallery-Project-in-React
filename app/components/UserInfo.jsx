@@ -1,10 +1,14 @@
 
 import React from 'react'
 
-const UserInfo = () => {
+const UserInfo = ({userInfo}) => {
+  console.log(userInfo);
   return (
     <div>
-        <h1>Userinfo</h1>
+        <Image src={userInfo.userImage}
+        alt='userImage'
+        width={80}
+        height={80}/>
     </div>
   )
 }
