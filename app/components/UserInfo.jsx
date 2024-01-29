@@ -14,6 +14,8 @@ function UserInfo({userInfo}) {
         <h2 className='text-[30px]
         font-semibold'>{userInfo.userName}</h2>
         <h2 className='text-gray-400'>{userInfo.email}</h2>
+        <button className='bg-gray-300 
+        p-2 px-3 font-semibold mt-5 rounded-full'>Share</button>
     </div>
   )
 }
