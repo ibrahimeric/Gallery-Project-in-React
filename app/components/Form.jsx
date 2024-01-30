@@ -2,8 +2,9 @@
 import React,{useState} from 'react'
 import UploadImage from './UploadImage'
 import {useSession} from "next-auth/react"
-
+import {getDownloadURL,getStorage,ref,uploadBytes} from 'firebase/storage'
 import UserTag from './UserTag'
+import app from '../Shared/firebaseConfig'
 
 function Form() {
   const {data:session}=useSession();
@@ -12,11 +13,21 @@ function Form() {
   const [link,setLink]=useState();
   const [file,setFile]=useState();
 
+
+  const storage=getStorage(app)
   const onSave=()=>{
     console.log("Title:",title,"Desc",desc,"Link",link)
     console.log("File:",file)
+    uploadFile();
   }
 
+
+  const uploadFile=()=>{
+       const storageRef=ref(storage,'pinterest/'+file.name);
+       uploadBytes(storageRef,file).then((snapshot)=>{
+        console.log("File uploaded")
+       })
+  }
 
   return (
     <div className='bg-white p-16 rounded-2x1'>
