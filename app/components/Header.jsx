@@ -51,8 +51,8 @@ function Header() {
       
 
       {session?.user?  
-      <Image src={session.user.image} 
-      onClick={() => router.push('/'+session.user.email)}
+      <Imagesrc={session.user.image} 
+      onClick={() =router.push('/'+session.user.email)}
       alt='user-image' width={60} height={60}
         className='hover:bg-gray-300 p-2
         rounded-full cursor-pointer'/>:
