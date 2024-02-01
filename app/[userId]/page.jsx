@@ -1,13 +1,16 @@
 "use client"
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import app from '../Shared/firebaseConfig';
 import UserInfo from './../components/UserInfo'
+import { collection, getDocs,getDoc,doc, getFirestore, query, where } from 'firebase/firestore'
+
+import PinList from './../components/Pins/PinList'
 
 
 const Profile = ({params}) => {
     const db = getFirestore(app);
     const [userInfo,setUserInfo]=useState();
+    const [listOfPins,setListOfPins]=useState([]);
     useEffect(() =>{
         console.log(params.userId.replace('%40','@'))
         if(params)
@@ -30,11 +33,32 @@ const Profile = ({params}) => {
             console.log("No such document!");
         }
     }
+
+
+
+    useEffect(()=>{
+        if(userInfo)
+        {
+            getUserPins();
+        }
+        
+    },[userInfo])
+    const getUserPins=async()=>{
+        const q=query(collection(db,'pinterest-post')
+        ,where("email",'==',userInfo.email));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        
+        setListOfPins(listOfPins=>[...listOfPins,doc.data()]);
+        });
+    }
   return (
     <div>
         {userInfo?
         <UserInfo userInfo={userInfo}/>
         :null}
+        <PinList listOfPins={listOfPins}/>
     </div>
   )
 }

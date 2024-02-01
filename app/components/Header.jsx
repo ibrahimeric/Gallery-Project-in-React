@@ -26,17 +26,27 @@ function Header() {
       });
     }
   }
+
+  const onCreateClick=()=>{
+    if(session)
+    {
+      router.push('/pin-builder')
+    }
+    else{
+      signIn()
+    }
+  }
   
   return (
     <div className='flex gap-3 md:gap-2 items-center p-6'>
       <Image src='/logo.png' alt='logo'
-      width={50} height={50}
+      width={50} height={50} onClick={()=>router.push('/')}
       className='hover:bg-gray-300 p-2
       rounded-full cursor-pointer'/>
       <button className='bg-black 
       text-white p-2 px-4 rounded-full hidden md:block'>Home</button>
       <button className='font-semibold p-2 px-4
-       rounded-full' onClick={()=>router.push('/pin-builder')}>Create</button>
+       rounded-full' onClick={()=>onCreateClick()}>Create</button>
       <div className='bg-[#e9e9e9] p-3
       gap-3 items-center rounded-full w-full hidden md:flex'>
         <HiSearch className='text-[25px]
