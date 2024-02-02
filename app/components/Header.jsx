@@ -39,7 +39,7 @@ function Header() {
   
   return (
     <div className='flex gap-3 md:gap-2 items-center p-6'>
-      <Image src='/logo.png' alt='logo'
+      <Image src='/GalleryApp-logo.png' alt='logo'
       width={50} height={50} onClick={()=>router.push('/')}
       className='hover:bg-gray-300 p-2
       rounded-full cursor-pointer'/>
