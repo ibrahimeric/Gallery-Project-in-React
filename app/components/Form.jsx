@@ -49,16 +49,25 @@ function Form() {
                 await setDoc(doc(db, 'pinterest-post', postId), postData);
                 console.log("Saved");
                 setShowSuccessModal(true); // Show success modal
-                setTimeout(() => setShowSuccessModal(false), 3000); // Close modal after 3 seconds
             })
             .catch((error) => {
                 console.error("Error uploading file:", error);
             })
             .finally(() => {
                 setLoading(false); // Set loading to false after upload completes
-                router.push('/'); // Navigate back to home page
             });
     };
+
+    useEffect(() => {
+        let timeout;
+        if (showSuccessModal) {
+            timeout = setTimeout(() => {
+                setShowSuccessModal(false);
+                router.push('/'); // Navigate back to home page
+            }, 3000); // Close modal after 3 seconds
+        }
+        return () => clearTimeout(timeout);
+    }, [showSuccessModal, router]);
 
     return (
         <div className='bg-white p-16 rounded-2x1'>
